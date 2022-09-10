@@ -30,15 +30,15 @@ int main(void)
 					{
 						break;
 					}
-					putchar(',');						
-					putchar(' ');				
-				}				
-				g++;				
+					putchar(',');
+					putchar(' ');
+				}
+				g++;
 			}
 			i++;
-			}			
-		e++;		
-	}	
+		}
+		e++;
+	}
 	putchar('\n');
 	return (0);
 }
