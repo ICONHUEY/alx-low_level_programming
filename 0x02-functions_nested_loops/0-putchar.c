@@ -5,13 +5,14 @@
  */
 int main(void)
 {
-	cher c{} = "_putchar";
-	int i;
+	cher *sh = "_putchar";
 
-	for (i = 0; i < 9; i++)
+	while (*sh)
 	{
-		_putchar(c[i]);
+		_putchar(*sh);
+		sh++;
 	}
 	_putchar('\n')
+
 	return (0);
 }
