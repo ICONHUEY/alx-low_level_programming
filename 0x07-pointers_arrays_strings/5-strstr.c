@@ -9,17 +9,20 @@
  */
 char *_strstr(char *haystack, char *needle)
 {
-	unsigned int len;
-	/*Get length of needle for strncmp*/
-	len = 0;
-	while (needle[len] != '\0')
-		len++;
-	/*compare substring*/
-	while (*haystack != '\0')
+	for (; *haystack != '\0'; haystack++)
 	{
-		if (_strncmp(haystack, needle, len) == 0)
+		char *one = haystack;
+		char *two = needle;
+
+		while (*one == *two && *two != '\0')
+		{
+			one++;
+			two++;
+		}
+
+		if (*two == '\0')
 			return (haystack);
-		haystack++;
 	}
+
 	return (NULL);
 }
