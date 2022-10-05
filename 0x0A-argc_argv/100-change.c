@@ -1,61 +1,67 @@
 #include "main.h"
 #include <stdio.h>
-#include <ctype.h>
 #include <stdlib.h>
-#include <string.h>
-
+nt change(int cents);
 /**
- * checker - checks for valid input
- * @argc: argument count
- * @i: counter for argv[]
- * @j: counter for argv[][]
- * @argv: argument vector
+ * main - Entry Point
+ * @argc: arguments
+ * @argv: array pointing to arguments
  *
- * Return: 0 on success, 1 on failure
- */
-int checker(int argc, int i, unsigned int j, char *argv[])
-{
-	for (i = 1; i <= argc; i++)
-		for (j = 0; argv[i] != '\0' && j < strlen(argv[i]); j++)
-			if (isdigit(argv[i][j]) == 0)
-				return (1);
-		return (0);
-}
-/**
- * main - Prints the minimum number of coins
- * to make change for an amount of cents.
- * @argc: argument count
- * @argv: argument vector
- *
- * Return: 0 on success
+ * Return: 0
  */
 int main(int argc, char *argv[])
 {
-	unsigned int cents;
+	if (argc != 2)
+	{
+		printf("%s\n", "Error");
+		return (1);
+	}
+	else if (argc < 0)
+	{
+		return (0);
+	}
+
+	printf("%d\n", change(atoi(argv[1])));
+	return (0);
+}
+/**
+ * change - get change
+ * @cents: amount of coins from main function
+ *
+ * Return: change
+ */
+int change(int cents)
+{
+	int q = 25, d = 10, n = 5, t = 2, p = 1;
 	int coins;
 
-	cents = coins = 0;
-	if (argc == 2)
+	while (cents > 0)
 	{
-		if (argv[1][0] == '-')
-			printf("0\n");
-		if (checker(argc, 1, 0, argv) == 0)
+		while (cents >= q)
 		{
-			cents = atoi(argv[1]);
-			for ( ; cents >= 25; coins++, cents -= 25)
-				;
-			for ( ; cents >= 10; coins++, cents -= 10)
-				;
-			for ( ; cents >= 5; coins++, cents -= 5)
-				;
-			for ( ; cents >= 2; coins++, cents -= 2)
-				;
-			for ( ; cents >= 1; coins++, cents--)
-				;
-			printf("%d\n", coins);
+			cents -= q;
+			coins++;
+		}
+		while (cents >= d)
+		{
+			cents -= d;
+			coins++;
+		}
+		while (cents >= n)
+		{
+			cents -= n;
+			coins++;
+		}
+		while (cents >= t)
+		{
+			cents -= t;
+			coins++;
+		}
+		while (cents >= p)
+		{
+			cents -= p;
+			coins++;
 		}
 	}
-	else
-		printf("Error\n");
-	return (0);
+	return (coins);
 }
